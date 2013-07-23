@@ -30,7 +30,7 @@ class StdOutListener(StreamListener):
         """
         def on_status(self, data):
             try:
-                print '%s , %s , %s , %s , %s, %s, %s, %s, %s, %s, %s, %s, %s' % \
+                print '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s' % \
                 (data.text,
                 data.author.screen_name,
                 data.created_at,
