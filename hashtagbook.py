@@ -1,9 +1,17 @@
 import sys
 import time
 import tweepy
+import ast
+import os
+import mimetypes
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
+from tweepy.binder import bind_api
+from tweepy.error import TweepError
+from tweepy.parsers import ModelParser
+from tweepy.utils import list_to_csv
+from tweepy.api import API
 
 # Go to http://dev.twitter.com and create an app.
 # The consumer key and secret will be generated for you after
@@ -22,9 +30,20 @@ class StdOutListener(StreamListener):
         """
         def on_status(self, data):
             try:
-                print '%s , %s , %s , %s , %s' % (data.text,\
-                data.author.screen_name,data.created_at,data.source,\
-                data.coordinates)
+                print '%s , %s , %s , %s , %s, %s, %s, %s, %s, %s, %s, %s, %s' % \
+                (data.text,
+                data.author.screen_name,
+                data.created_at,
+                data.source,
+                data.coordinates, 
+                data.retweet_count,
+                data.favorited,
+                data.favorite_count,
+                data.contributors,
+                data.filter_level,
+                data.in_reply_to_screen_name,
+                data.retweeted,
+                data.place) # need to break out items from object
                 return True
             except Exception, e:
                 print >> sys.stderr, 'Encountered Exception:', e
